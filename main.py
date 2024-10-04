@@ -20,7 +20,7 @@ for k in range(height):
 
 blocks[0,0] = 100
 
-for k in range(100):
+for k in range(1000):
     print(blocks)
     for i in range(height):
         for j in range(width):
@@ -46,8 +46,9 @@ for k in range(100):
             
     blocks += delta_blocks
     delta_blocks = np.zeros((height, width))
-    im = plt.imshow(blocks)
+    im = plt.imshow(blocks,cmap=plt.cm.jet,vmax=200,vmin=-10)
     cb = plt.colorbar()
+    cb.set_ticks(np.linspace(-10, 200, 5)) 
     plt.savefig(f"images//{k}.png")
     cb.remove()
     plt.cla()

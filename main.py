@@ -10,6 +10,7 @@ delta_blocks = np.zeros((height, width))
 spread_rate = 0.1
 max = 100
 min = 0
+cycle = 100
 
 fig = plt.figure()
 images = []
@@ -22,7 +23,7 @@ for k in range(height):
 
 blocks[0,0] = 100
 
-for k in range(1000):
+for k in range(cycle):
     print(blocks)
     for i in range(height):
         for j in range(width):
@@ -48,10 +49,16 @@ for k in range(1000):
             
     blocks += delta_blocks
     delta_blocks = np.zeros((height, width))
-    images.append(plt.imshow(blocks,cmap=plt.cm.jet,vmax=max,vmin=-min))
+    im = plt.imshow(blocks,cmap=plt.cm.jet,vmax=max,vmin=-min)
     cb = plt.colorbar()
     cb.set_ticks(np.linspace(min, max, 5)) 
     plt.savefig(f"images//{k}.png")
     cb.remove()
     plt.cla()
     #time.sleep(1)
+
+for k in range(cycle):
+    im = Image.open(f"images/{k}.png")
+
+images[0].save('images.gif',
+               save_all=True, append_images=images[1:], optimize=False, duration=40, loop=0)

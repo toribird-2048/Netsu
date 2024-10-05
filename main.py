@@ -8,8 +8,8 @@ height, width = 10,10
 blocks = np.zeros((height, width))
 delta_blocks = np.zeros((height, width))
 spread_rate = 0.1
-max = 200
-min = -10
+max = 100
+min = 0
 
 fig = plt.figure()
 images = []
@@ -48,7 +48,7 @@ for k in range(1000):
             
     blocks += delta_blocks
     delta_blocks = np.zeros((height, width))
-    im = plt.imshow(blocks,cmap=plt.cm.jet,vmax=max,vmin=-min)
+    images.append(plt.imshow(blocks,cmap=plt.cm.jet,vmax=max,vmin=-min))
     cb = plt.colorbar()
     cb.set_ticks(np.linspace(min, max, 5)) 
     plt.savefig(f"images//{k}.png")

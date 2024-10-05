@@ -7,10 +7,10 @@ import os
 height, width = 10,10
 blocks = np.zeros((height, width))
 delta_blocks = np.zeros((height, width))
-spread_rates = np.full((height, width),0.1)
+spread_rates = np.full((height, width),0.3)
 max = 200
 min = 0
-cycle = 3000
+cycle = 300
 
 fig = plt.figure()
 images = []
@@ -22,10 +22,9 @@ for k in range(height):
 """
 
 blocks[0,0] = 100
-spread_rates[5,5] = 0.01
-spread_rates[6,5] = 0.05
-spread_rates[5,6] = 0.05
-spread_rates[6,6] = 0.05
+for k in range(height-2):
+    spread_rates[k,4] = 0
+    spread_rates[k,5] = 0
 
 for k in range(cycle):
     print(blocks)
